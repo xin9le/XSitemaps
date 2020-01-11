@@ -4,6 +4,21 @@
         <TargetFrameworks>netstandard1.1;netstandard2.1</TargetFrameworks>
         <LangVersion>8.0</LangVersion>
         <Nullable>enable</Nullable>
+        <!-- NuGet -->
+        <IsPackable>true</IsPackable>
+        <PackageId>XSitemaps</PackageId>
+        <Version>1.0.0.0</Version>
+        <Description>Simple sitemap.xml serializer for better SEO.</Description>
+        <PackageProjectUrl>https://github.com/xin9le/XSitemaps</PackageProjectUrl>
+        <PackageTags>Sitemap, XML, SEO</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <Company />
+        <Authors>xin9le</Authors>
+        <Copyright>Copyright© xin9le, All rights reserved.</Copyright>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">
