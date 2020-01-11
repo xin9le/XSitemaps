@@ -49,7 +49,7 @@ namespace XSitemaps
             return buffer;
 
             #region Local Functions
-            int CalculateSeparationCount(int urlCount, int maxCount)
+            static int CalculateSeparationCount(int urlCount, int maxCount)
             {
                 var div = urlCount / maxCount;
                 var mod = urlCount % maxCount;

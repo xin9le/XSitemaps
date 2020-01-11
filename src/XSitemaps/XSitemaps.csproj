@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard1.1;netstandard2.1</TargetFrameworks>
-        <LanguageVersion>7.3</LanguageVersion>
-        <Nullable>disable</Nullable>
+        <LangVersion>8.0</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">

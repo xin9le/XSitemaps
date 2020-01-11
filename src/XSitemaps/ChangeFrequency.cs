@@ -31,18 +31,16 @@ namespace XSitemaps
         /// <param name="value"></param>
         /// <returns></returns>
         public static string ToParameter(this ChangeFrequency value)
-        {
-            switch (value)
+            => value switch
             {
-                case ChangeFrequency.Always: return "always";
-                case ChangeFrequency.Hourly: return "hourly";
-                case ChangeFrequency.Daily: return "daily";
-                case ChangeFrequency.Weekly: return "weekly";
-                case ChangeFrequency.Monthly: return "monthly";
-                case ChangeFrequency.Yearly: return "yearly";
-                case ChangeFrequency.Never: return "never";
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
+                ChangeFrequency.Always => "always",
+                ChangeFrequency.Hourly => "hourly",
+                ChangeFrequency.Daily => "daily",
+                ChangeFrequency.Weekly => "weekly",
+                ChangeFrequency.Monthly => "monthly",
+                ChangeFrequency.Yearly => "yearly",
+                ChangeFrequency.Never => "never",
+                _ => throw new ArgumentOutOfRangeException(),
+            };
     }
 }
