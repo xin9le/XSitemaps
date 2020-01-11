@@ -47,6 +47,15 @@ namespace XSitemaps
                 buffer[i] = new Sitemap(slice);
             }
             return buffer;
+
+            #region Local Functions
+            int CalculateSeparationCount(int urlCount, int maxCount)
+            {
+                var div = urlCount / maxCount;
+                var mod = urlCount % maxCount;
+                return (mod == 0) ? div : div + 1;
+            }
+            #endregion
         }
         #endregion
 
@@ -80,22 +89,6 @@ namespace XSitemaps
                 root.Add(element);
             }
             return root;
-        }
-        #endregion
-
-
-        #region Helpers
-        /// <summary>
-        /// Calculates file separation count.
-        /// </summary>
-        /// <param name="urlCount"></param>
-        /// <param name="maxCount"></param>
-        /// <returns></returns>
-        private static int CalculateSeparationCount(int urlCount, int maxCount)
-        {
-            var div = urlCount / maxCount;
-            var mod = urlCount % maxCount;
-            return (mod == 0) ? div : div + 1;
         }
         #endregion
     }
