@@ -54,7 +54,7 @@ for (var i = 0; i < sitemaps.Length; i++)
 //--- Sitemap_0.xml
 /*
 <?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.xin9le.net</loc>
     <lastmod>2020-01-12T00:07:12.2351485+09:00</lastmod>
@@ -72,7 +72,7 @@ for (var i = 0; i < sitemaps.Length; i++)
 //--- Sitemap_1.xml
 /*
 <?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.xin9le.net/entry/async-method-intro</loc>
     <changefreq>weekly</changefreq>
@@ -110,7 +110,7 @@ using (var stream = new FileStream(path, FileMode.CreateNew))
 
 /*
 <?xml version="1.0" encoding="utf-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://example.com/Sitemap_0.xml</loc>
     <lastmod>2020-01-12T00:13:24.4802279+09:00</lastmod>
