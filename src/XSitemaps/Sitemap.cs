@@ -69,7 +69,12 @@ namespace XSitemaps
         {
             //--- Create root element
             XNamespace ns = SitemapConstants.XmlNamespace;
-            var root = new XElement(ns + "urlset");
+            XNamespace xsi = SitemapConstants.XmlSchemaInstance;
+            XNamespace schemaLocation = SitemapConstants.SitemapSchemaLocation;
+            var root = new XElement(
+                ns + "urlset",
+                new XAttribute(XNamespace.Xmlns + nameof(xsi), xsi),
+                new XAttribute(xsi + nameof(schemaLocation), schemaLocation));
 
             //--- Create and Add child elements.
             var urls = this.Urls.Span;
