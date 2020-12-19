@@ -37,7 +37,7 @@ namespace XSitemaps
         /// <returns></returns>
         public static Sitemap[] Create(ReadOnlyMemory<SitemapUrl> urls, int maxUrlCount = SitemapConstants.MaxUrlCount)
         {
-            var count = CalculateSeparationCount(urls.Length, maxUrlCount);
+            var count = calculateSeparationCount(urls.Length, maxUrlCount);
             var buffer = new Sitemap[count];
             for (var i = 0; i < buffer.Length; i++)
             {
@@ -49,7 +49,7 @@ namespace XSitemaps
             return buffer;
 
             #region Local Functions
-            static int CalculateSeparationCount(int urlCount, int maxCount)
+            static int calculateSeparationCount(int urlCount, int maxCount)
             {
                 var div = urlCount / maxCount;
                 var mod = urlCount % maxCount;
