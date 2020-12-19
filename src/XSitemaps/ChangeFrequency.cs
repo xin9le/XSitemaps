@@ -40,7 +40,7 @@ namespace XSitemaps
                 ChangeFrequency.Monthly => "monthly",
                 ChangeFrequency.Yearly => "yearly",
                 ChangeFrequency.Never => "never",
-                _ => throw new ArgumentOutOfRangeException(),
+                _ => throw new ArgumentOutOfRangeException(nameof(value)),
             };
     }
 }
