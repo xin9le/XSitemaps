@@ -21,7 +21,7 @@ namespace XSitemaps
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public byte[] Serialize(SerializeOptions options = default)
+        public byte[] Serialize(in SerializeOptions options = default)
         {
             using (var stream = new MemoryStream())
             {
@@ -36,7 +36,7 @@ namespace XSitemaps
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="options"></param>
-        public void Serialize(Stream stream, SerializeOptions options = default)
+        public void Serialize(Stream stream, in SerializeOptions options = default)
         {
             var xml = this.ToXElement();
             var xmlSaveOption = options.EnableIndent ? SaveOptions.None : SaveOptions.DisableFormatting;
