@@ -9,12 +9,39 @@ namespace XSitemaps
     /// </summary>
     public enum ChangeFrequency
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Always = 0,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Hourly,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Daily,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Weekly,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Monthly,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Yearly,
+
+        /// <summary>
+        /// 
+        /// </summary>
         Never,
     }
 
