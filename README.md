@@ -4,6 +4,8 @@ SEO (= Search Engine Optimization) is very important to improve the page views o
 
 This library provides a simple and easy to use `sitemap.xml` serializer.
 
+[![Releases](https://img.shields.io/github/release/xin9le/XSitemaps.svg)](https://github.com/xin9le/XSitemaps/releases)
+
 
 
 # Supported features
