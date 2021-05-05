@@ -3,17 +3,17 @@
     /// <summary>
     /// Represents sitemap serialization options.
     /// </summary>
-    public struct SerializeOptions
+    public readonly struct SerializeOptions
     {
         /// <summary>
         /// Gets or sets whether to enable indentation.
         /// </summary>
-        public bool EnableIndent { get; set; }
+        public bool EnableIndent { get; init; }
 
 
         /// <summary>
         /// Gets or sets whether to enable gzip compression.
         /// </summary>
-        public bool EnableGzipCompression { get; set; }
+        public bool EnableGzipCompression { get; init; }
     }
 }
