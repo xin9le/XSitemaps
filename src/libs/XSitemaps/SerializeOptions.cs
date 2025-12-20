@@ -1,19 +1,20 @@
-﻿namespace XSitemaps
+﻿namespace XSitemaps;
+
+
+
+/// <summary>
+/// Represents sitemap serialization options.
+/// </summary>
+public readonly struct SerializeOptions
 {
     /// <summary>
-    /// Represents sitemap serialization options.
+    /// Gets or sets whether to enable indentation.
     /// </summary>
-    public readonly struct SerializeOptions
-    {
-        /// <summary>
-        /// Gets or sets whether to enable indentation.
-        /// </summary>
-        public bool EnableIndent { get; init; }
+    public bool EnableIndent { get; init; }
 
 
-        /// <summary>
-        /// Gets or sets whether to enable gzip compression.
-        /// </summary>
-        public bool EnableGzipCompression { get; init; }
-    }
+    /// <summary>
+    /// Gets or sets whether to enable gzip compression.
+    /// </summary>
+    public bool EnableGzipCompression { get; init; }
 }
