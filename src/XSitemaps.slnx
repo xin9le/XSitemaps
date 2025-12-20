@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="XSitemaps/XSitemaps.csproj" />
+  <Folder Name="/libs/">
+    <Project Path="libs/XSitemaps/XSitemaps.csproj" />
+  </Folder>
 </Solution>
