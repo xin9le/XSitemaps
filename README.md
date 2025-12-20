@@ -1,15 +1,15 @@
 ﻿# XSitemaps
-
 SEO (= Search Engine Optimization) is very important to improve the page views of your website. Sitemaps are defined in a simple XML-formatted file that can be read by search engines to more accurately crawl your site. And also Sitemaps are widely supported by many companies, including Google, Yahoo!, and Microsoft. See [sitemaps.org](https://www.sitemaps.org/) for more details.
 
 This library provides a simple and easy to use `sitemap.xml` serializer.
 
 [![Releases](https://img.shields.io/github/release/xin9le/XSitemaps.svg)](https://github.com/xin9le/XSitemaps/releases)
+[![Nuget packages](https://img.shields.io/nuget/v/XSitemaps.svg)](https://www.nuget.org/packages/XSitemaps/)
+[![GitHub license](https://img.shields.io/github/license/xin9le/XSitemaps)](https://github.com/xin9le/XSitemaps/blob/main/LICENSE)
 
 
 
 # Supported features
-
 - Sitemap file serialization
 - SitemapIndex file serialization
 - Split files according to the number of URLs
@@ -19,13 +19,13 @@ This library provides a simple and easy to use `sitemap.xml` serializer.
 
 
 # Support platform
-
 - .NET Standard 2.0+
 - .NET 8+
 
 
 
-# Create `Sitemap.xml`
+# How to use
+## Create `Sitemap.xml`
 
 ```cs
 //--- Create Sitemaps
@@ -86,7 +86,7 @@ for (var i = 0; i < sitemaps.Length; i++)
 ```
 
 
-# Create `SitemapIndex.xml`
+## Create `SitemapIndex.xml`
 
 ```cs
 //--- Create SitemapIndex
@@ -126,22 +126,19 @@ using (var stream = new FileStream(path, FileMode.CreateNew))
 ```
 
 
-# Installation
-
+## Installation
 Getting started from downloading [NuGet](https://www.nuget.org/packages/XSitemaps) package.
 
 ```
-> dotnet add package XSitemaps
+dotnet add package XSitemaps
 ```
 
 
 
 # License
-
 This library is provided under [MIT License](http://opensource.org/licenses/MIT).
 
 
 
 # Author
-
 Takaaki Suzuki (a.k.a [@xin9le](https://x.com/xin9le)) is software developer in Japan who awarded Microsoft MVP for Developer Technologies (C#) since July 2012.
