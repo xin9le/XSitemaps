@@ -1,4 +1,4 @@
-# XSitemaps
+﻿# XSitemaps
 
 SEO (= Search Engine Optimization) is very important to improve the page views of your website. Sitemaps are defined in a simple XML-formatted file that can be read by search engines to more accurately crawl your site. And also Sitemaps are widely supported by many companies, including Google, Yahoo!, and Microsoft. See [sitemaps.org](https://www.sitemaps.org/) for more details.
 
@@ -20,7 +20,8 @@ This library provides a simple and easy to use `sitemap.xml` serializer.
 
 # Support platform
 
-- .NET Standard 1.1+
+- .NET Standard 2.0+
+- .NET 8+
 
 
 
@@ -130,7 +131,7 @@ using (var stream = new FileStream(path, FileMode.CreateNew))
 Getting started from downloading [NuGet](https://www.nuget.org/packages/XSitemaps) package.
 
 ```
-PM> Install-Package XSitemaps
+> dotnet add package XSitemaps
 ```
 
 
@@ -143,4 +144,4 @@ This library is provided under [MIT License](http://opensource.org/licenses/MIT)
 
 # Author
 
-Takaaki Suzuki (a.k.a [@xin9le](https://twitter.com/xin9le)) is software developer in Japan who awarded Microsoft MVP for Developer Technologies (C#) since July 2012.
+Takaaki Suzuki (a.k.a [@xin9le](https://x.com/xin9le)) is software developer in Japan who awarded Microsoft MVP for Developer Technologies (C#) since July 2012.
