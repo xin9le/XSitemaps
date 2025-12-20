@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.IO.Compression;
-#if !NETSTANDARD1_1
+#if !NETSTANDARD2_0
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -52,7 +52,7 @@ namespace XSitemaps
         }
 
 
-#if !NETSTANDARD1_1
+#if !NETSTANDARD2_0
         /// <summary>
         /// Serialize asynchronously.
         /// </summary>
