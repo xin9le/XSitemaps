@@ -9,23 +9,14 @@ namespace XSitemaps;
 /// <summary>
 /// Represents information about all of the Sitemaps.
 /// </summary>
-public sealed class SitemapIndex : SitemapBase
+/// <param name="sitemaps"></param>
+public sealed class SitemapIndex(IEnumerable<SitemapInfo> sitemaps) : SitemapBase
 {
     #region Properties
     /// <summary>
     /// Gets information about an individual Sitemap.
     /// </summary>
-    public IEnumerable<SitemapInfo> Sitemaps { get; }
-    #endregion
-
-
-    #region Constructors
-    /// <summary>
-    /// Creates instance.
-    /// </summary>
-    /// <param name="sitemaps"></param>
-    public SitemapIndex(IEnumerable<SitemapInfo> sitemaps)
-        => this.Sitemaps = sitemaps;
+    public IEnumerable<SitemapInfo> Sitemaps { get; } = sitemaps;
     #endregion
 
 
