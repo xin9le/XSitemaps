@@ -27,7 +27,7 @@ namespace XSitemaps
         /// <summary>
         /// Gets how frequently the page is likely to change.
         /// </summary>
-        public ChangeFrequency ChangeFrequency { get; }
+        public ChangeFrequency? ChangeFrequency { get; }
 
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace XSitemaps
         /// This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers.
         /// The default priority of a page is 0.5.
         /// </summary>
-        public double Priority { get; }
+        public double? Priority { get; }
         #endregion
 
 
@@ -48,7 +48,7 @@ namespace XSitemaps
         /// <param name="modifiedAt">The date of last modification of the file.</param>
         /// <param name="frequency">How frequently the page is likely to change.</param>
         /// <param name="priority">The priority of this URL relative to other URLs on your site.</param>
-        public SitemapUrl(string location, DateTimeOffset? modifiedAt = null, ChangeFrequency frequency = ChangeFrequency.Never, double priority = 0.5)
+        public SitemapUrl(string location, DateTimeOffset? modifiedAt = null, ChangeFrequency? frequency = null, double? priority = null)
         {
             this.Location = location;
             this.LastModifiedAt = modifiedAt;

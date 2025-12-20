@@ -89,8 +89,14 @@ namespace XSitemaps
                     var at = url.LastModifiedAt.Value.ToString("o");
                     element.Add(new XElement(ns + "lastmod", at));
                 }
-                element.Add(new XElement(ns + "changefreq", url.ChangeFrequency.ToParameter()));
-                element.Add(new XElement(ns + "priority", url.Priority));
+                if (url.ChangeFrequency.HasValue)
+                {
+                    element.Add(new XElement(ns + "changefreq", url.ChangeFrequency.Value.ToParameter()));
+                }
+                if (url.Priority.HasValue)
+                {
+                    element.Add(new XElement(ns + "priority", url.Priority.Value));
+                }
                 root.Add(element);
             }
             return root;
