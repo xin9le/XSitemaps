@@ -1,5 +1,7 @@
-﻿namespace XSitemaps.Internals
-{
+﻿namespace XSitemaps.Internals;
+
+
+
     /// <summary>
     /// Provides well known constants for sitemap.xml.
     /// </summary>
