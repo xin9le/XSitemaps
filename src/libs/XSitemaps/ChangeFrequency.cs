@@ -52,21 +52,23 @@ public enum ChangeFrequency
 /// </summary>
 internal static class ChangeFrequencyExtensions
 {
-    /// <summary>
-    /// Converts to parameter value string.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static string ToParameter(this ChangeFrequency value)
-        => value switch
-        {
-            ChangeFrequency.Always => "always",
-            ChangeFrequency.Hourly => "hourly",
-            ChangeFrequency.Daily => "daily",
-            ChangeFrequency.Weekly => "weekly",
-            ChangeFrequency.Monthly => "monthly",
-            ChangeFrequency.Yearly => "yearly",
-            ChangeFrequency.Never => "never",
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
-        };
+    extension(ChangeFrequency @this)
+    {
+        /// <summary>
+        /// Converts to parameter value string.
+        /// </summary>
+        /// <returns></returns>
+        public string ToParameter()
+            => @this switch
+            {
+                ChangeFrequency.Always => "always",
+                ChangeFrequency.Hourly => "hourly",
+                ChangeFrequency.Daily => "daily",
+                ChangeFrequency.Weekly => "weekly",
+                ChangeFrequency.Monthly => "monthly",
+                ChangeFrequency.Yearly => "yearly",
+                ChangeFrequency.Never => "never",
+                _ => throw new ArgumentOutOfRangeException(nameof(@this)),
+            };
+    }
 }
