@@ -10,7 +10,7 @@ namespace XSitemaps;
 /// Represents information about all of the Sitemaps.
 /// </summary>
 /// <param name="sitemaps"></param>
-public sealed class SitemapIndex(IEnumerable<SitemapInfo> sitemaps) : SitemapBase
+public sealed class SitemapIndex(IEnumerable<SitemapInfo> sitemaps) : ISitemapSerializable
 {
     #region Properties
     /// <summary>
@@ -20,12 +20,9 @@ public sealed class SitemapIndex(IEnumerable<SitemapInfo> sitemaps) : SitemapBas
     #endregion
 
 
-    #region Overrides
-    /// <summary>
-    /// Converts to <see cref="XElement"/>.
-    /// </summary>
-    /// <returns></returns>
-    private protected override XElement ToXElement()
+    #region ISitemapSerializable
+    /// <inheritdoc/>
+    XElement ISitemapSerializable.ToXElement()
     {
         //--- Create root element
         XNamespace ns = SitemapConstants.XmlNamespace;
