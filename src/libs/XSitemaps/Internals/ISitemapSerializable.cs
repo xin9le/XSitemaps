@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace XSitemaps;
+namespace XSitemaps.Internals;
 
 
 

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 using System.Xml.Linq;
+using XSitemaps.Internals;
 
 namespace XSitemaps;
 
