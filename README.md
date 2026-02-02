@@ -42,7 +42,7 @@ var sitemaps = Sitemap.Create(urls, maxUrlCount: 2);
 for (var i = 0; i < sitemaps.Length; i++)
 {
     var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-    var path = Path.Combine(desktop, $"Sitemap_{i}.xml");
+    var path = Path.Combine(desktop, $"sitemap{i}.xml");
     using (var stream = new FileStream(path, FileMode.CreateNew))
     {
         var options = new SerializeOptions
@@ -50,11 +50,11 @@ for (var i = 0; i < sitemaps.Length; i++)
             EnableIndent = true,
             EnableGzipCompression = false,
         };
-        sitemaps[i].Serialize(stream, options);
+        SitemapSerializer.Serialize(stream, sitemaps[i], options);
     }
 }
 
-//--- Sitemap_0.xml
+//--- sitemap0.xml
 /*
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -72,7 +72,7 @@ for (var i = 0; i < sitemaps.Length; i++)
 </urlset>
 */
 
-//--- Sitemap_1.xml
+//--- sitemap1.xml
 /*
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -93,14 +93,14 @@ for (var i = 0; i < sitemaps.Length; i++)
 var modifiedAt = DateTimeOffset.Now;
 var info = new[]
 {
-    new SitemapInfo("https://example.com/Sitemap_0.xml", modifiedAt),
-    new SitemapInfo("https://example.com/Sitemap_1.xml"),
+    new SitemapInfo("https://example.com/sitemap0.xml", modifiedAt),
+    new SitemapInfo("https://example.com/sitemap1.xml"),
 };
 var index = new SitemapIndex(info);
 
 //--- Output to file
 var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-var path = Path.Combine(desktop, $"SitemapIndex.xml");
+var path = Path.Combine(desktop, $"sitemapindex.xml");
 using (var stream = new FileStream(path, FileMode.CreateNew))
 {
     var options = new SerializeOptions
@@ -108,18 +108,18 @@ using (var stream = new FileStream(path, FileMode.CreateNew))
         EnableIndent = true,
         EnableGzipCompression = false,
     };
-    index.Serialize(stream, options);
+    SitemapSerializer.Serialize(stream, index, options);
 }
 
 /*
 <?xml version="1.0" encoding="utf-8"?>
 <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://example.com/Sitemap_0.xml</loc>
+    <loc>https://example.com/sitemap0.xml</loc>
     <lastmod>2020-01-12T00:13:24.4802279+09:00</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://example.com/Sitemap_1.xml</loc>
+    <loc>https://example.com/sitemap1.xml</loc>
   </sitemap>
 </sitemapindex>
 */

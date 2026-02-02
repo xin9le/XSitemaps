@@ -9,7 +9,7 @@ namespace XSitemaps;
 /// <summary>
 /// Represents indivisual sitemap.xml file.
 /// </summary>
-public sealed class Sitemap : SitemapBase
+public sealed class Sitemap : ISitemapSerializable
 {
     #region Properties
     /// <summary>
@@ -61,12 +61,9 @@ public sealed class Sitemap : SitemapBase
     #endregion
 
 
-    #region Overrides
-    /// <summary>
-    /// Converts to <see cref="XElement"/>.
-    /// </summary>
-    /// <returns></returns>
-    private protected override XElement ToXElement()
+    #region ISitemapSerializable
+    /// <inheritdoc/>
+    XElement ISitemapSerializable.ToXElement()
     {
         //--- Create root element
         XNamespace ns = SitemapConstants.XmlNamespace;
