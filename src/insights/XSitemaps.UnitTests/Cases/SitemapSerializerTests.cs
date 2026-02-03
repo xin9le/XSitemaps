@@ -99,4 +99,44 @@ public sealed class SitemapSerializerTests
         }
         #endregion
     }
+
+
+    [TestMethod]
+    public void Serialize_SitemapIndex()
+    {
+        var modifiedAt = new DateTimeOffset(2026, 1, 2, 12, 34, 56, TimeSpan.FromHours(9));
+        var info = new SitemapInfo[]
+        {
+            new("https://example.com/sitemap0.xml", modifiedAt),
+            new("https://example.com/sitemap1.xml"),
+        };
+        var index = new SitemapIndex(info);
+        var actual = toXmlString(index);
+        var expect = """
+            ﻿<?xml version="1.0" encoding="utf-8"?>
+            <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+              <sitemap>
+                <loc>https://example.com/sitemap0.xml</loc>
+                <lastmod>2026-01-02T12:34:56.0000000+09:00</lastmod>
+              </sitemap>
+              <sitemap>
+                <loc>https://example.com/sitemap1.xml</loc>
+              </sitemap>
+            </sitemapindex>
+            """;
+        actual.ShouldBe(expect);
+
+        #region Local functions
+        static string toXmlString(SitemapIndex index)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var options = new SitemapSerializerOptions { EnableIndent = true };
+                SitemapSerializer.Serialize(stream, index, options);
+                var bytes = stream.ToArray();
+                return Encoding.UTF8.GetString(bytes);
+            }
+        }
+        #endregion
+    }
 }
