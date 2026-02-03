@@ -11,6 +11,7 @@ This library provides a simple and easy to use `sitemap.xml` serializer.
 
 # Supported features
 - Sitemap file serialization
+    - Google-specific extensions (currently, image only)
 - SitemapIndex file serialization
 - Split files according to the number of URLs
 - Controllable indent
@@ -29,20 +30,34 @@ This library provides a simple and easy to use `sitemap.xml` serializer.
 
 ```cs
 //--- Create Sitemaps
-var modifiedAt = DateTimeOffset.Now;
-var urls = new[]
-{
-    new SitemapUrl("https://blog.xin9le.net", modifiedAt, ChangeFrequency.Daily, priority: 1.0),
-    new SitemapUrl("https://blog.xin9le.net/entry/rx-intro"),
-    new SitemapUrl("https://blog.xin9le.net/entry/async-method-intro", frequency: ChangeFrequency.Weekly),
-};
-var sitemaps = Sitemap.Create(urls, maxUrlCount: 2);
+var modifiedAt = new DateTimeOffset(2026, 1, 2, 12, 34, 56, TimeSpan.FromHours(9));
+var urls
+    = new SitemapUrl[]
+    {
+        new("https://blog.xin9le.net"),
+        new("https://blog.xin9le.net/entry/rx-intro", modifiedAt, ChangeFrequency.Daily, priority: 0.8),
+        new("https://blog.xin9le.net/entry/async-method-intro", frequency: ChangeFrequency.Weekly),
+        new("https://example.com/sample1.html", google: new
+        (
+            images: [
+                new("https://example.com/image.jpg"),
+                new("https://example.com/photo.jpg"),
+            ]
+        )),
+        new("https://example.com/sample2.html", google: new
+        (
+            images: [
+                new("https://example.com/picture.jpg"),
+            ]
+        )),
+    };
+var sitemaps = Sitemap.Create(urls, maxUrlCount: 3);
 
 //--- Output to files
-for (var i = 0; i < sitemaps.Length; i++)
+foreach (var (index, sitemap) in sitemaps.Index())
 {
     var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-    var path = Path.Combine(desktop, $"sitemap{i}.xml");
+    var path = Path.Combine(desktop, $"sitemap{index}.xml");
     using (var stream = new FileStream(path, FileMode.CreateNew))
     {
         var options = new SerializeOptions
@@ -50,39 +65,48 @@ for (var i = 0; i < sitemaps.Length; i++)
             EnableIndent = true,
             EnableGzipCompression = false,
         };
-        SitemapSerializer.Serialize(stream, sitemaps[i], options);
+        SitemapSerializer.Serialize(stream, sitemap, options);
     }
 }
-
+```
+```xml
 //--- sitemap0.xml
-/*
 <?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.xin9le.net</loc>
-    <lastmod>2020-01-12T00:07:12.2351485+09:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
   </url>
   <url>
     <loc>https://blog.xin9le.net/entry/rx-intro</loc>
-    <changefreq>never</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-01-02T12:34:56.0000000+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
-</urlset>
-*/
-
-//--- sitemap1.xml
-/*
-<?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.xin9le.net/entry/async-method-intro</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>
-*/
+
+//--- sitemap1.xml
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/sample1.html</loc>
+    <image:image>
+      <image:loc>https://example.com/image.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://example.com/photo.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://example.com/sample2.html</loc>
+    <image:image>
+      <image:loc>https://example.com/picture.jpg</image:loc>
+    </image:image>
+  </url>
+</urlset>
 ```
 
 
@@ -90,11 +114,11 @@ for (var i = 0; i < sitemaps.Length; i++)
 
 ```cs
 //--- Create SitemapIndex
-var modifiedAt = DateTimeOffset.Now;
-var info = new[]
+var modifiedAt = new DateTimeOffset(2026, 1, 2, 12, 34, 56, TimeSpan.FromHours(9));
+var info = new SitemapInfo[]
 {
-    new SitemapInfo("https://example.com/sitemap0.xml", modifiedAt),
-    new SitemapInfo("https://example.com/sitemap1.xml"),
+    new("https://example.com/sitemap0.xml", modifiedAt),
+    new("https://example.com/sitemap1.xml"),
 };
 var index = new SitemapIndex(info);
 
@@ -110,19 +134,18 @@ using (var stream = new FileStream(path, FileMode.CreateNew))
     };
     SitemapSerializer.Serialize(stream, index, options);
 }
-
-/*
+```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://example.com/sitemap0.xml</loc>
-    <lastmod>2020-01-12T00:13:24.4802279+09:00</lastmod>
+    <lastmod>2026-01-02T12:34:56.0000000+09:00</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://example.com/sitemap1.xml</loc>
   </sitemap>
 </sitemapindex>
-*/
 ```
 
 
