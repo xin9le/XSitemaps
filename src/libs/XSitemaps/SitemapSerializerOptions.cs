@@ -3,9 +3,9 @@
 
 
 /// <summary>
-/// Represents sitemap serialization options.
+/// Represents options for <see cref="SitemapSerializer"/>.
 /// </summary>
-public readonly struct SerializeOptions
+public readonly struct SitemapSerializerOptions
 {
     /// <summary>
     /// Gets or sets whether to enable indentation.
