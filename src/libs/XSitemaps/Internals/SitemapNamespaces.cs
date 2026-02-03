@@ -10,7 +10,7 @@ namespace XSitemaps.Internals;
 internal static class SitemapNamespaces
 {
     /// <summary>
-    /// Represents namespace for sitemap.xml.
+    /// Represents root namespace for sitemap.xml.
     /// </summary>
     public static readonly XNamespace Root = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
