@@ -79,22 +79,22 @@ public sealed class Sitemap : ISitemapSerializable
         {
             //--- Create URL element
             var url = urls[i];
-            var element = new XElement(ns + "url");
-            element.Add(new XElement(ns + "loc", url.Location));
+            var urlElement = new XElement(ns + "url");
+            urlElement.Add(new XElement(ns + "loc", url.Location));
             if (url.LastModifiedAt.HasValue)
             {
                 var at = url.LastModifiedAt.Value.ToString("o");
-                element.Add(new XElement(ns + "lastmod", at));
+                urlElement.Add(new XElement(ns + "lastmod", at));
             }
             if (url.ChangeFrequency.HasValue)
             {
-                element.Add(new XElement(ns + "changefreq", url.ChangeFrequency.Value.ToParameter()));
+                urlElement.Add(new XElement(ns + "changefreq", url.ChangeFrequency.Value.ToParameter()));
             }
             if (url.Priority.HasValue)
             {
-                element.Add(new XElement(ns + "priority", url.Priority.Value));
+                urlElement.Add(new XElement(ns + "priority", url.Priority.Value));
             }
-            root.Add(element);
+            root.Add(urlElement);
         }
         return root;
     }
