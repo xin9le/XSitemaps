@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using XSitemaps.Internals;
 
@@ -71,7 +72,8 @@ public sealed class Sitemap : ISitemapSerializable
         var root = new XElement(
             ns + "urlset",
             new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XAttribute(xsi + "schemaLocation", SitemapNamespaces.SitemapSchemaLocation));
+            new XAttribute(xsi + "schemaLocation", SitemapNamespaces.SitemapSchemaLocation),
+            new XAttribute(XNamespace.Xmlns + "image", SitemapNamespaces.GoogleExtensions.Image));
 
         //--- Create and Add child elements.
         var urls = this.Urls.Span;
@@ -94,6 +96,21 @@ public sealed class Sitemap : ISitemapSerializable
             {
                 urlElement.Add(new XElement(ns + "priority", url.Priority.Value));
             }
+
+            //--- Google-specific extensions
+            if (url.GoogleExtensions is not null)
+            {
+                var google = url.GoogleExtensions;
+                var images = google.Images?.Take(SitemapConstants.GoogleExtensions.MaxImageCount) ?? [];
+                foreach (var x in images)
+                {
+                    var ns2 = SitemapNamespaces.GoogleExtensions.Image;
+                    var imageElement = new XElement(ns2 + "image");
+                    imageElement.Add(new XElement(ns2 + "loc", x.Location));
+                    urlElement.Add(imageElement);
+                }
+            }
+
             root.Add(urlElement);
         }
         return root;
