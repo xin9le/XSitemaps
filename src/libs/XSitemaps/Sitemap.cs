@@ -68,11 +68,10 @@ public sealed class Sitemap : ISitemapSerializable
         //--- Create root element
         var ns = SitemapNamespaces.Root;
         var xsi = SitemapNamespaces.XmlSchemaInstance;
-        var schemaLocation = SitemapNamespaces.SitemapSchemaLocation;
         var root = new XElement(
             ns + "urlset",
-            new XAttribute(XNamespace.Xmlns + nameof(xsi), xsi),
-            new XAttribute(xsi + nameof(schemaLocation), schemaLocation));
+            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+            new XAttribute(xsi + "schemaLocation", SitemapNamespaces.SitemapSchemaLocation));
 
         //--- Create and Add child elements.
         var urls = this.Urls.Span;
