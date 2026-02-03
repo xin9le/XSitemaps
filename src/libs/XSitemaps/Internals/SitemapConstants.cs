@@ -11,4 +11,17 @@ internal static class SitemapConstants
     /// Represents maximum url count.
     /// </summary>
     public const int MaxUrlCount = 50000;
+
+
+
+    /// <summary>
+    /// Provides constants for Google-specific extensions.
+    /// </summary>
+    public static class GoogleExtensions
+    {
+        /// <summary>
+        /// Represents maximum image count.
+        /// </summary>
+        public const int MaxImageCount = 1000;
+    }
 }

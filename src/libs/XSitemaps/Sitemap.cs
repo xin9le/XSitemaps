@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using XSitemaps.Internals;
 
@@ -68,11 +69,11 @@ public sealed class Sitemap : ISitemapSerializable
         //--- Create root element
         var ns = SitemapNamespaces.Root;
         var xsi = SitemapNamespaces.XmlSchemaInstance;
-        var schemaLocation = SitemapNamespaces.SitemapSchemaLocation;
         var root = new XElement(
             ns + "urlset",
-            new XAttribute(XNamespace.Xmlns + nameof(xsi), xsi),
-            new XAttribute(xsi + nameof(schemaLocation), schemaLocation));
+            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+            new XAttribute(xsi + "schemaLocation", SitemapNamespaces.SitemapSchemaLocation),
+            new XAttribute(XNamespace.Xmlns + "image", SitemapNamespaces.GoogleExtensions.Image));
 
         //--- Create and Add child elements.
         var urls = this.Urls.Span;
@@ -80,22 +81,37 @@ public sealed class Sitemap : ISitemapSerializable
         {
             //--- Create URL element
             var url = urls[i];
-            var element = new XElement(ns + "url");
-            element.Add(new XElement(ns + "loc", url.Location));
+            var urlElement = new XElement(ns + "url");
+            urlElement.Add(new XElement(ns + "loc", url.Location));
             if (url.LastModifiedAt.HasValue)
             {
                 var at = url.LastModifiedAt.Value.ToString("o");
-                element.Add(new XElement(ns + "lastmod", at));
+                urlElement.Add(new XElement(ns + "lastmod", at));
             }
             if (url.ChangeFrequency.HasValue)
             {
-                element.Add(new XElement(ns + "changefreq", url.ChangeFrequency.Value.ToParameter()));
+                urlElement.Add(new XElement(ns + "changefreq", url.ChangeFrequency.Value.ToParameter()));
             }
             if (url.Priority.HasValue)
             {
-                element.Add(new XElement(ns + "priority", url.Priority.Value));
+                urlElement.Add(new XElement(ns + "priority", url.Priority.Value));
             }
-            root.Add(element);
+
+            //--- Google-specific extensions
+            if (url.GoogleExtensions is not null)
+            {
+                var google = url.GoogleExtensions;
+                var images = google.Images?.Take(SitemapConstants.GoogleExtensions.MaxImageCount) ?? [];
+                foreach (var x in images)
+                {
+                    var ns2 = SitemapNamespaces.GoogleExtensions.Image;
+                    var imageElement = new XElement(ns2 + "image");
+                    imageElement.Add(new XElement(ns2 + "loc", x.Location));
+                    urlElement.Add(imageElement);
+                }
+            }
+
+            root.Add(urlElement);
         }
         return root;
     }

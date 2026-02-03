@@ -1,4 +1,5 @@
 ﻿using System;
+using XSitemaps.Google;
 
 namespace XSitemaps;
 
@@ -11,7 +12,8 @@ namespace XSitemaps;
 /// <param name="modifiedAt">The date of last modification of the file.</param>
 /// <param name="frequency">How frequently the page is likely to change.</param>
 /// <param name="priority">The priority of this URL relative to other URLs on your site.</param>
-public sealed class SitemapUrl(string location, DateTimeOffset? modifiedAt = null, ChangeFrequency? frequency = null, double? priority = null)
+/// <param name="google">The Google-specific extensions.</param>
+public sealed class SitemapUrl(string location, DateTimeOffset? modifiedAt = null, ChangeFrequency? frequency = null, double? priority = null, GoogleExtensions? google = null)
 {
     #region Properties
     /// <summary>
@@ -40,5 +42,11 @@ public sealed class SitemapUrl(string location, DateTimeOffset? modifiedAt = nul
     /// This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers.
     /// </summary>
     public double? Priority { get; } = priority;
+
+
+    /// <summary>
+    /// Gets the Google-specific extensions.
+    /// </summary>
+    public GoogleExtensions? GoogleExtensions { get; } = google;
     #endregion
 }
