@@ -22,7 +22,7 @@ public static class SitemapSerializer
     /// <param name="stream"></param>
     /// <param name="sitemap"></param>
     /// <param name="options"></param>
-    public static void Serialize(Stream stream, Sitemap sitemap, in SerializeOptions options = default)
+    public static void Serialize(Stream stream, Sitemap sitemap, in SitemapSerializerOptions options = default)
         => SerializeCore(stream, sitemap, options);
 
 
@@ -32,7 +32,7 @@ public static class SitemapSerializer
     /// <param name="stream"></param>
     /// <param name="index"></param>
     /// <param name="options"></param>
-    public static void Serialize(Stream stream, SitemapIndex index, in SerializeOptions options = default)
+    public static void Serialize(Stream stream, SitemapIndex index, in SitemapSerializerOptions options = default)
         => SerializeCore(stream, index, options);
 
 
@@ -44,7 +44,7 @@ public static class SitemapSerializer
     /// <param name="sitemap"></param>
     /// <param name="options"></param>
     /// <param name="cancellationToken"></param>
-    public static async Task SerializeAsync(Stream stream, Sitemap sitemap, SerializeOptions options = default, CancellationToken cancellationToken = default)
+    public static async Task SerializeAsync(Stream stream, Sitemap sitemap, SitemapSerializerOptions options = default, CancellationToken cancellationToken = default)
         => await SerializeAsyncCore(stream, sitemap, options, cancellationToken).ConfigureAwait(false);
 
 
@@ -55,7 +55,7 @@ public static class SitemapSerializer
     /// <param name="index"></param>
     /// <param name="options"></param>
     /// <param name="cancellationToken"></param>
-    public static async Task SerializeAsync(Stream stream, SitemapIndex index, SerializeOptions options = default, CancellationToken cancellationToken = default)
+    public static async Task SerializeAsync(Stream stream, SitemapIndex index, SitemapSerializerOptions options = default, CancellationToken cancellationToken = default)
         => await SerializeAsyncCore(stream, index, options, cancellationToken).ConfigureAwait(false);
 #endif
 
@@ -68,7 +68,7 @@ public static class SitemapSerializer
     /// <param name="stream"></param>
     /// <param name="instance"></param>
     /// <param name="options"></param>
-    private static void SerializeCore<T>(Stream stream, T instance, in SerializeOptions options)
+    private static void SerializeCore<T>(Stream stream, T instance, in SitemapSerializerOptions options)
         where T : ISitemapSerializable
     {
         var xml = instance.ToXElement();
@@ -94,7 +94,7 @@ public static class SitemapSerializer
     /// <param name="instance"></param>
     /// <param name="options"></param>
     /// <param name="cancellationToken"></param>
-    private static async Task SerializeAsyncCore<T>(Stream stream, T instance, SerializeOptions options, CancellationToken cancellationToken)
+    private static async Task SerializeAsyncCore<T>(Stream stream, T instance, SitemapSerializerOptions options, CancellationToken cancellationToken)
         where T : ISitemapSerializable
     {
         var xml = instance.ToXElement();
