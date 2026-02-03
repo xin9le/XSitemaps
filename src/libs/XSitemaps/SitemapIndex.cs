@@ -25,9 +25,9 @@ public sealed class SitemapIndex(IEnumerable<SitemapInfo> sitemaps) : ISitemapSe
     XElement ISitemapSerializable.ToXElement()
     {
         //--- Create root element
-        XNamespace ns = SitemapConstants.XmlNamespace;
-        XNamespace xsi = SitemapConstants.XmlSchemaInstance;
-        XNamespace schemaLocation = SitemapConstants.SiteindexSchemaLocation;
+        var ns = SitemapNamespaces.Root;
+        var xsi = SitemapNamespaces.XmlSchemaInstance;
+        var schemaLocation = SitemapNamespaces.SiteindexSchemaLocation;
         var root = new XElement(
             ns + "sitemapindex",
             new XAttribute(XNamespace.Xmlns + nameof(xsi), xsi),

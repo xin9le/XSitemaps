@@ -66,9 +66,9 @@ public sealed class Sitemap : ISitemapSerializable
     XElement ISitemapSerializable.ToXElement()
     {
         //--- Create root element
-        XNamespace ns = SitemapConstants.XmlNamespace;
-        XNamespace xsi = SitemapConstants.XmlSchemaInstance;
-        XNamespace schemaLocation = SitemapConstants.SitemapSchemaLocation;
+        var ns = SitemapNamespaces.Root;
+        var xsi = SitemapNamespaces.XmlSchemaInstance;
+        var schemaLocation = SitemapNamespaces.SitemapSchemaLocation;
         var root = new XElement(
             ns + "urlset",
             new XAttribute(XNamespace.Xmlns + nameof(xsi), xsi),
