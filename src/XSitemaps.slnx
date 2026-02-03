@@ -6,6 +6,9 @@
     <File Path="libs/NuGet.props" />
     <File Path="NuGet.config" />
   </Folder>
+  <Folder Name="/insights/">
+    <Project Path="insights/XSitemaps.UnitTests/XSitemaps.UnitTests.csproj" />
+  </Folder>
   <Folder Name="/libs/">
     <Project Path="libs/XSitemaps/XSitemaps.csproj" />
   </Folder>
