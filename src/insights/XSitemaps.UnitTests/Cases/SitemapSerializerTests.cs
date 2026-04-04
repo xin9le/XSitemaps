@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
-using XSitemaps;
 
 namespace XSitemaps.UnitTests.Cases;
 
