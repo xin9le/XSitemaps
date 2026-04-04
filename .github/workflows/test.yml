@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        Tfm: [net8.0, net9.0, net10.0]
+        Tfm: [net9.0, net10.0]
 
     steps:
       - name: Setup .NET SDK
