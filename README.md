@@ -21,7 +21,7 @@ This library provides a simple and easy to use `sitemap.xml` serializer.
 
 # Support platform
 - .NET Standard 2.0+
-- .NET 8+
+- .NET 10+
 
 
 
